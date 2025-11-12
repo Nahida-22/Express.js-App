@@ -1,0 +1,35 @@
+[
+  {
+    "_id":"ObjectId(...)",
+    
+    "firstName":"Nahida",
+    "lastName":"Rojoa",
+    "address":"123 Royal Road",
+    "city":"Vacoas",
+    "state":"CA",
+    "Zip":13692,
+    "phoneNumber":"+230 58115711",
+    "method":"Home",
+    "gift":true,
+     
+  "items": [
+    {
+      "lessonID": "0001",
+      "title":    "Mathematics 101",
+      "location": "Building A, Room 101",
+      "image":    "assets/MathCourse.png",       
+      "price":    100,
+      "quantity": 2
+    },
+    {
+      "lessonID": "0005",
+      "title":    "Computer Science 101",
+      "location": "Building E, Room 505",
+      "image":    "assets/computerScienceCourse.jpg",
+      "price":    200,
+      "quantity": 1
+    }
+  ]
+
+  }
+]
