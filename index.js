@@ -83,7 +83,6 @@ app.post("/api/order", async (req, res) => {
       city,
       state,
       zip,
-      phoneNumber,
       method,
       gift,
       items, // [{ lessonID, title, location, image, price, quantity }]
@@ -105,7 +104,6 @@ app.post("/api/order", async (req, res) => {
       city,
       state,
       zip,
-      phoneNumber,
       method,
       gift,
       items,
