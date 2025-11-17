@@ -2,11 +2,14 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const PropertiesReader = require("properties-reader");
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
+app.use(express.static("public"));
+
 app.set("json spaces", 3);
 
 //Load properties
@@ -53,14 +56,16 @@ app.param("collectionName", function (req, res, next, collectionName) {
   }
 });
 
-//Fetch all documents
-app.get("/api/:collectionName", async function (req, res) {
+// Fetch all documents
+app.get("/api/lessons", async function (req, res) {
   try {
-    console.log("Received request for:", req.params.collectionName);
-    console.log("Accessing collection:", req.collection.collectionName);
+    const collection = db1.collection("Courses");
 
-    const results = await req.collection.find({}).toArray();
+    console.log("Accessing collection: Courses");
+
+    const results = await collection.find({}).toArray();
     console.log("Retrieved data:", results.length);
+
     res.status(200).json(results);
   } catch (err) {
     console.error("Error fetching data:", err);
@@ -69,7 +74,7 @@ app.get("/api/:collectionName", async function (req, res) {
 });
 
 // Create new order (minimal fields, no client-side totals)
-app.post("/api/orders", async (req, res) => {
+app.post("/api/order", async (req, res) => {
   try {
     const {
       firstName,
@@ -81,7 +86,7 @@ app.post("/api/orders", async (req, res) => {
       phoneNumber,
       method,
       gift,
-      items // [{ lessonID, title, location, image, price, quantity }]
+      items, // [{ lessonID, title, location, image, price, quantity }]
     } = req.body || {};
 
     // Basic validation
@@ -92,7 +97,7 @@ app.post("/api/orders", async (req, res) => {
       return res.status(400).json({ error: "Address details incomplete" });
     }
 
-    // Build order 
+    // Build order
     const orderDoc = {
       firstName,
       lastName,
@@ -103,7 +108,7 @@ app.post("/api/orders", async (req, res) => {
       phoneNumber,
       method,
       gift,
-      items
+      items,
     };
 
     const ordersCol = db1.collection("Orders");
@@ -111,7 +116,7 @@ app.post("/api/orders", async (req, res) => {
 
     res.status(201).json({
       message: "Order placed successfully",
-      orderId: result.insertedId
+      orderId: result.insertedId,
     });
   } catch (err) {
     console.error("Create order failed:", err);
@@ -119,7 +124,59 @@ app.post("/api/orders", async (req, res) => {
   }
 });
 
+//put route
+app.put("/api/:collectionName/:id", async function (req, res, next) {
+  try {
+    console.log(
+      "Received request to update quantity of lessons for lesson with id:",
+      req.params.id
+    );
 
+    //Update a single document by id
+    const data = req.body;
+
+    const result = await req.collection.UpdateOne(
+      { _id: new ObjectId(req.params.id) },
+      { $set: data },
+      { safe: true, multi: false }
+    );
+    console.log("Update operation result:", result);
+
+    res.json(result.matchedCount === 1 ? { msg: "success" } : { msg: "error" });
+  } catch (err) {
+    console.error("Error updating document:", err.message);
+    next(err);
+  }
+});
+
+//GET ROUTE for Search
+app.get("/api/search", async (req, res) => {
+  try {
+    //GET keyword from query string
+    //if no keyword is provided, default is empty string
+    const keyword = req.query.keyword || "";
+
+    //Create a case-insensitive regular expression for fuzzy search
+    const searchRegex = new RegExp(keyword, "i");
+
+    //Query the collection "Courses"
+    const results = await db1
+      .collection("Courses")
+      .find({
+        $or: [
+          { title: searchRegex }, //search title
+          { description: searchRegex }, //search in description
+          { location: searchRegex }, //search in location
+          { price: searchRegex }, //search in price (converted automatically to string)
+          { availableInventory: searchRegex }, //search in available spaces
+        ],
+      })
+      .toArray();
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ error: "Search failed" });
+  }
+});
 
 //Global error handler
 app.use((err, req, res, next) => {
