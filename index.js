@@ -124,6 +124,7 @@ app.post("/api/order", async (req, res) => {
   }
 });
 
+
 //put route
 app.put("/api/:collectionName/:id", async function (req, res, next) {
   try {
@@ -178,6 +179,58 @@ app.get("/api/search", async (req, res) => {
   }
 });
 
+app.post("/api/signup", async(req,res) =>{
+  try{
+    const { firstName, lastName, email, password } = req.body || {};
+    const usersCol = db1.collection("Users");
+    // Check if email already exists
+    const existing = await usersCol.findOne({ email });
+    if (existing) {
+      return res.status(409).json({ error: "Email is already registered." });
+    }
+    const userDoc = {
+      firstName,
+      lastName,
+      email,
+      password
+    };
+
+    const results = await usersCol.insertOne(userDoc);
+    res.json(results);
+  } catch (err){
+    console.error('Error inserting: ', err.message);
+    
+  }
+
+});
+//Sign In route
+app.post("/api/signin", async(req,res)=>{
+  try{
+    const {email,password}=req.body || {};
+     if (!email || !password) {
+      return res.status(400).json({ error: "Email and password are required." });
+    }
+    const usersCol = db1.collection("Users");
+    const user = await usersCol.findOne({ email });
+    if (!user || user.password !== password) {
+      return res.status(401).json({ error: "Invalid email or password." });
+    }
+    return res.json({
+      message: "Login successful",
+      user: {
+        id: user._id,
+        email: user.email,
+        username: user.username || "",
+      }
+    });
+  } catch (err){
+      
+    console.error("Signin failed:", err);
+    return res.status(500).json({ error: "Signin failed." });
+  }
+  
+ 
+});
 //Global error handler
 app.use((err, req, res, next) => {
   console.error("Global error handler:", err);
