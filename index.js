@@ -79,6 +79,7 @@ app.post("/api/order", async (req, res) => {
     const {
       firstName,
       lastName,
+      phoneNumber,
       address,
       city,
       state,
@@ -100,6 +101,7 @@ app.post("/api/order", async (req, res) => {
     const orderDoc = {
       firstName,
       lastName,
+      phoneNumber,
       address,
       city,
       state,
@@ -133,7 +135,7 @@ app.put("/api/:collectionName/:id", async function (req, res, next) {
     //Update a single document by id
     const data = req.body;
 
-    const result = await req.collection.UpdateOne(
+    const result = await req.collection.updateOne(
       { _id: new ObjectId(req.params.id) },
       { $set: data },
       { safe: true, multi: false }
