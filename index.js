@@ -194,11 +194,11 @@ app.get("/api/search", async (req, res) => {
       .collection("Courses")
       .find({
         $or: [
-          { title: searchRegex }, //search title
+          { topic: searchRegex }, //search title
           { description: searchRegex }, //search in description
           { location: searchRegex }, //search in location
           { price: searchRegex }, //search in price (converted automatically to string)
-          { availableInventory: searchRegex }, //search in available spaces
+          { space: searchRegex }, //search in available spaces
         ],
       })
       .toArray();

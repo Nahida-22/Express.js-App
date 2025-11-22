@@ -15,7 +15,7 @@
   "items": [
     {
       "lessonID": "0001",
-      "title":    "Mathematics 101",
+      "topic":    "Mathematics 101",
       "location": "Building A, Room 101",
       "image":    "assets/MathCourse.png",       
       "price":    100,
@@ -23,7 +23,7 @@
     },
     {
       "lessonID": "0005",
-      "title":    "Computer Science 101",
+      "topic":    "Computer Science 101",
       "location": "Building E, Room 505",
       "image":    "assets/computerScienceCourse.jpg",
       "price":    200,
