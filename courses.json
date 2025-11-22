@@ -15,7 +15,7 @@
     "image": "public/assets/scienceCourse.jpg",
     "location": "Building B, Room 202",
     "price": 150,
-    "space": 3
+    "space": 5
   },
   {
     "id": "0003",
@@ -24,7 +24,7 @@
     "image": "public/assets/historyCourse.jpg",
     "location": "Building C, Room 303",
     "price": 120,
-    "space": 4
+    "space": 5
   },
   {
     "id": "0004",
@@ -33,7 +33,7 @@
     "image": "public/assets/artCourse.jpg",
     "location": "Building D, Room 404",
     "price": 130,
-    "space": 2
+    "space": 5
   },
   {
     "id": "0005",
@@ -42,7 +42,7 @@
     "image": "public/assets/computerScienceCourse.jpg",
     "location": "Building E, Room 505",
     "price": 200,
-    "space": 6
+    "space": 5
   },
   {
     "id": "0006",
@@ -51,7 +51,7 @@
     "description": "The ultimate french learning course for beginners",
     "location": "Building D, Room 403",
     "price": 250,
-    "space": 15
+    "space": 5
   },
   {
     "id": "0007",
@@ -60,7 +60,7 @@
     "description": "The ultimate crash course",
     "location": "Building A, Room 103",
     "price": 300,
-    "space": 20
+    "space": 5
   },
   {
     "id": "0008",
@@ -69,7 +69,7 @@
     "description": "A comprehensive course",
     "location": "Building A, Room 105",
     "price": 500,
-    "space": 10
+    "space": 5
   },
   {
     "id": "0009",
@@ -78,7 +78,7 @@
     "description": "Learn more about the world of finance in Law",
     "location": "Building B, Room 205",
     "price": 400,
-    "space": 13
+    "space": 5
   },
   {
     "id": "0010",
@@ -87,6 +87,6 @@
     "description": "An introduction to Business Management",
     "location": "Building c, Room 306",
     "price": 110,
-    "space": 20
+    "space": 5
   }
 ]
