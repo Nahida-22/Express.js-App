@@ -3,14 +3,43 @@ const cors = require("cors");
 const path = require("path");
 const PropertiesReader = require("properties-reader");
 const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
+const fs = require("fs"); 
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
-app.use(express.static("public"));
+
 
 app.set("json spaces", 3);
+
+//logs all incoming requests to the console
+app.use(function(req, res, next) {
+  console.log("Request IP: " + req.ip);
+  console.log("Request date: " + new Date());
+  console.log("Request method: " + req.method);
+  console.log("Request URL: " + req.url);
+  console.log("----------------------------------------");
+  next();
+});
+//Static file serving middleware
+app.use(function(req, res, next) {
+  var filePath = path.join(__dirname, "public", req.url);
+  
+  fs.stat(filePath, function(err, fileInfo) {
+    if (err) {
+      next();
+      return;
+    }
+    
+    if (fileInfo.isFile()) {
+      res.sendFile(filePath);
+    } else {
+      next();
+    }
+  });
+});
+
 
 //Load properties
 let propertiesPath = path.resolve(__dirname, "./dbconnection.properties");
@@ -220,7 +249,8 @@ app.post("/api/signin", async(req,res)=>{
       user: {
         id: user._id,
         email: user.email,
-        username: user.username || "",
+        firstName: user.firstName || "",
+        lastName:  user.lastName || "",
       }
     });
   } catch (err){
@@ -230,6 +260,12 @@ app.post("/api/signin", async(req,res)=>{
   }
   
  
+});
+
+// 404 handler for unmatched routes
+app.use(function(req, res) {
+  res.status(404);
+  res.send("File not found!");
 });
 //Global error handler
 app.use((err, req, res, next) => {
