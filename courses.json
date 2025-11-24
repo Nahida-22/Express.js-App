@@ -21,7 +21,7 @@
     "id": "0003",
     "topic": "History 201",
     "description": "A journey through historical events.",
-    "image": "public/assets/historyCourse.jpg",
+    "image": "assets/historyCourse.jpg",
     "location": "Building C, Room 303",
     "price": 120,
     "space": 5
@@ -30,7 +30,7 @@
     "id": "0004",
     "topic": "Art 101",
     "description": "Discovering the world of Art.",
-    "image": "public/assets/artCourse.jpg",
+    "image": "assets/artCourse.jpg",
     "location": "Building D, Room 404",
     "price": 130,
     "space": 5
@@ -39,7 +39,7 @@
     "id": "0005",
     "topic": "Computer Science 101",
     "description": "Introduction to Computer Science concepts.",
-    "image": "public/assets/computerScienceCourse.jpg",
+    "image": "assets/computerScienceCourse.jpg",
     "location": "Building E, Room 505",
     "price": 200,
     "space": 5
@@ -47,7 +47,7 @@
   {
     "id": "0006",
     "topic": "French Beginner class",
-    "image": "public/assets/frenchCourse.jpeg",
+    "image": "assets/frenchCourse.jpeg",
     "description": "The ultimate french learning course for beginners",
     "location": "Building D, Room 403",
     "price": 250,
@@ -56,7 +56,7 @@
   {
     "id": "0007",
     "topic": "ACCA Level 1",
-    "image": "public/assets/ACCA.jpg",
+    "image": "assets/ACCA.jpg",
     "description": "The ultimate crash course",
     "location": "Building A, Room 103",
     "price": 300,
@@ -65,7 +65,7 @@
   {
     "id": "0008",
     "topic": "Economics and Finance",
-    "image": "public/assets/economicsCourse.jpeg",
+    "image": "assets/economicsCourse.jpeg",
     "description": "A comprehensive course",
     "location": "Building A, Room 105",
     "price": 500,
@@ -74,7 +74,7 @@
   {
     "id": "0009",
     "topic": "Law and Finance",
-    "image": "public/assets/financeLawCourse.jpg",
+    "image": "assets/financeLawCourse.jpg",
     "description": "Learn more about the world of finance in Law",
     "location": "Building B, Room 205",
     "price": 400,
@@ -83,7 +83,7 @@
   {
     "id": "0010",
     "topic": "Business Studies",
-    "image": "public/assets/businessCourse.png",
+    "image": "assets/businessCourse.png",
     "description": "An introduction to Business Management",
     "location": "Building c, Room 306",
     "price": 110,
