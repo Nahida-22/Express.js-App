@@ -3,7 +3,7 @@
     "id": "0001",
     "topic": "Mathematics 101",
     "description": "An introductory course to Mathematics.",
-    "image": "public/assets/MathCourse.png",
+    "image": "assets/MathCourse.png",
     "location": "Building A, Room 101",
     "price": 100,
     "space": 5
@@ -12,7 +12,7 @@
     "id": "0002",
     "topic": "Science 301",
     "description": "Exploring the wonders of Science.",
-    "image": "public/assets/scienceCourse.jpg",
+    "image": "assets/scienceCourse.jpg",
     "location": "Building B, Room 202",
     "price": 150,
     "space": 5
