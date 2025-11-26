@@ -188,6 +188,8 @@ app.get("/api/search", async (req, res) => {
 
     //Create a case-insensitive regular expression for fuzzy search
     const searchRegex = new RegExp(keyword, "i");
+    const numericString = keyword.replace(/[^0-9.]/g, ""); // keep digits + dot
+    const numericValue = parseFloat(numericString);
 
     //Query the collection "Courses"
     const results = await db1
@@ -199,6 +201,8 @@ app.get("/api/search", async (req, res) => {
           { location: searchRegex }, //search in location
           { price: searchRegex }, //search in price (converted automatically to string)
           { space: searchRegex }, //search in available spaces
+          { price: numericValue }, 
+          { space: numericValue } 
         ],
       })
       .toArray();
