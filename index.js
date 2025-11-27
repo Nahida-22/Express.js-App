@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
   console.log("Request date: " + new Date());
   console.log("Request method: " + req.method);
   console.log("Request URL: " + req.url);
-  console.log("----------------------------------------");
+  console.log(" ");
   next();
 });
 //Static file serving middleware
@@ -102,7 +102,7 @@ app.get("/api/lessons", async function (req, res) {
   }
 });
 
-// Create new order (minimal fields, no client-side totals)
+// Create new order 
 app.post("/api/order", async (req, res) => {
   try {
     const {
@@ -188,7 +188,7 @@ app.get("/api/search", async (req, res) => {
 
     //Create a case-insensitive regular expression for fuzzy search
     const searchRegex = new RegExp(keyword, "i");
-    const numericString = keyword.replace(/[^0-9.]/g, ""); // keep digits + dot
+    const numericString = keyword.replace(/[^0-9.]/g, ""); 
     const numericValue = parseFloat(numericString);
 
     //Query the collection "Courses"
@@ -196,11 +196,11 @@ app.get("/api/search", async (req, res) => {
       .collection("Courses")
       .find({
         $or: [
-          { topic: searchRegex }, //search title
-          { description: searchRegex }, //search in description
-          { location: searchRegex }, //search in location
-          { price: searchRegex }, //search in price (converted automatically to string)
-          { space: searchRegex }, //search in available spaces
+          { topic: searchRegex }, 
+          { description: searchRegex }, 
+          { location: searchRegex }, 
+          { price: searchRegex }, 
+          { space: searchRegex }, 
           { price: numericValue }, 
           { space: numericValue } 
         ],
